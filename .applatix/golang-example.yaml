@@ -13,11 +13,11 @@ container:
   command: "%%CMD%%"
 inputs:
   artifacts:
-  - from: "%%service.checkout_service.code%%"
+  - from: "%%step.checkout_step.code%%"
     path: "/src"
   parameters:
     CMD:
-    checkout_service:
+    checkout_step:
 outputs:
   artifacts:
     code:
@@ -41,9 +41,9 @@ steps:
     template: golang-example-base
     parameters:
       CMD: "sh -c 'cd /src && go build main.go'"
-      checkout_service: "%%service.checkout.id%%"
+      checkout_step: "%%step.checkout.id%%"
   test:
     template: golang-example-base
     parameters:
       CMD: "sh -c 'cd /src && go test -v'"
-      checkout_service: "%%service.checkout.id%%"
+      checkout_step: "%%step.checkout.id%%"
