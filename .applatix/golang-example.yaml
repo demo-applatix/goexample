@@ -45,5 +45,5 @@ steps:
   test:
     template: golang-example-base
     parameters:
-      CMD: "sh -c 'cd /src && go test -v'"
+      CMD: "sh -c 'cd /src && go test -v -timeout 700s'"
       checkout_step: "%%step.checkout.id%%"
