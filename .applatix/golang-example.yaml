@@ -8,7 +8,7 @@ container:
     mem_mib: 256
     cpu_cores: 1.0
     disk_gb: 0
-  image: "docker.local/golang:1.6"
+  image: "golang:1.6"
   docker_options: ""
   command: "%%CMD%%"
 inputs:
@@ -36,14 +36,14 @@ inputs:
       default: "%%session.repo%%"
 steps:
 - checkout:
-    template: axcheckout
+    template: axscm-checkout
 - build:
     template: golang-example-base
     parameters:
-      CMD: "sh -c 'cd /src && go build main.go'"
+      CMD: "sh -c 'sleep 300 && cd /src && go build main.go'"
       checkout_step: "%%step.checkout.id%%"
   test:
     template: golang-example-base
     parameters:
-      CMD: "sh -c 'cd /src && go test -v -timeout 700s'"
+      CMD: "sh -c 'sleep 300 && cd /src && go test -v -timeout 700s'"
       checkout_step: "%%step.checkout.id%%"
