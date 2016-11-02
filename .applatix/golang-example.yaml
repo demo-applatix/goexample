@@ -26,8 +26,8 @@ outputs:
 ---
 type: service_template
 subtype: workflow
-name: golang-example-high-cpu-request
-description: golang example workflow which has high cpu requirement
+name: golang-example-long-running
+description: golang example workflow which is running relative long time 
 inputs:
   parameters:
     commit:
@@ -40,10 +40,10 @@ steps:
 - build:
     template: golang-example-base
     parameters:
-      CMD: "sh -c 'sleep 300 && cd /src && go build main.go'"
+      CMD: "sh -c 'sleep 60 && cd /src && go build main.go'"
       checkout_step: "%%step.checkout.id%%"
   test:
     template: golang-example-base
     parameters:
-      CMD: "sh -c 'sleep 300 && cd /src && go test -v -timeout 700s'"
+      CMD: "sh -c 'sleep 60 && cd /src && go test -v -timeout 700s'"
       checkout_step: "%%step.checkout.id%%"
